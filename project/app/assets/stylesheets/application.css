@@ -17,3 +17,25 @@ th, tr, td{
   border: 1px solid;
   padding: 5px;
 }
+table{
+  width: 80%;
+  margin: 10%;
+  margin-top: 0;
+}
+.alert{
+  color: red;
+  font-size: 18px;
+  font-weight: bold;
+}
+.notice{
+  color: green;
+  font-size: 18px;
+  font-weight: bold;
+}
+.btn{
+  color: white;
+  background-color: #D11616;
+  text-align: center;
+  border-radius: 10px;
+  width: 50px;
+}

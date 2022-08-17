@@ -1,41 +1,43 @@
 <h1>Formulário de Upload</h1>
 
 <%= form_tag({action: :upload}, multipart: true) do %>
-  <%= file_field_tag 'csv' %>
-  <%= submit_tag 'submit' %>
-  <hr>
-<% end %>
+<%= file_field_tag 'csv' %>
+<%= submit_tag 'submit' %>
+<hr>
 
 
 <table>
   <tr>
-    <th>purchaser name</th>
-    <th>item description</th>
-    <th>item price</th>
-    <th>purchase count</th>
-    <th>merchant address</th>
-    <th>merchant name</th>
+    <th>Purchaser Name</th>
+    <th>Item Description</th>
+    <th>Item Price</th>
+    <th>Purchase Count</th>
+    <th>Merchant Address</th>
+    <th>Merchant Name</th>
   </tr>
   <tr>
     <% @total = 0 %>
     <% @customers.each do |c| %>
-<tr>
+    <tr>
+      <td><%= c.purchaser_name %></td>
+      <td><%= c.item_description  %></td>
+      <td><%= c.item_price %></td>
+      <% price = c.item_price * c.purchase_count %>
+      <td><%= c.purchase_count %></td>
+      <td><%= c.merchant_address %></td>
+      <td><%= c.merchant_name %></td>
+      <td class="btn"><%= link_to "Remover", customer_path(c.id),
+        method: :delete, class: "btn",
+        :data => { confirm: 'Are you sure?' } %></td>
+      </tr>
+      <% @total += price %>
+      <% end %>
 
+      <tr>
+        <td style="border:none;"></td>
+        <td>Result</td>
+        <td colspan="2">R$ <%= @total %></td>
+      </tr>
 
-    <td><%= c.purchaser_name %></td>
-    <td><%= c.item_description  %></td>
-    <td><%= c.item_price %></td>
-    <td><%= c.purchase_count %></td>
-    <td><%= c.merchant_address %></td>
-    <td><%= c.merchant_name %></td>
-</tr>
-    <% @total = @total + c.item_price %>
+    </table>
     <% end %>
-
-<tr>
-  <td style="border:none;"></td>
-  <td>Resultado</td>
-  <td><%= @total %></td>
-</tr>
-
-</table>
